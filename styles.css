@@ -1,11 +1,15 @@
 body {
-  margin: 20px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(120deg, #ddebf8, #f0eef1, #ee4b6a);
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  background: linear-gradient(120deg, #0c73d4, #bbd13f, #ee4b6a);
   background-size: 200% 200%;
-  animation: gradientMove 9s ease-in-out infinite;
+  animation: gradientMove 5s ease-in-out infinite;
+  position: relative;
 }
-
 
 @keyframes gradientMove {
   0% { background-position: 0% 50%; }
@@ -14,24 +18,23 @@ body {
 }
 
 .card {
-  width: 400px;
-  margin: 0 auto;
-  padding: 24px;
+  width: 520px;
+  padding: 32px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   text-align: center;
   background: #ddebf8;
   color: #2b2839;
   border-radius: 18px;
-  border: 2px solid #5b5ea6;
+  border: 4px solid #5b5ea6;
   box-shadow: 0 8px 24px rgba(91,94,166,0.18);
   position: relative;
   overflow: hidden;
   transition: box-shadow 0.3s ease, border-color 0.3s ease;
-  animation: cardIn 0.7s cubic-bezier(.36,.32,.66,1.25);
+  animation: cardIn 1.2s cubic-bezier(.36,.32,.66,1.25);
 }
-
 
 .card::before {
   content: "";
@@ -59,18 +62,20 @@ body {
   border-color: #ee4b6a;
 }
 
-
 .card > * {
   position: relative;
   z-index: 1;
+  opacity: 0;
+  transform: translateY(40px) scale(0.95);
+  animation: cardContentIn 1.2s 0.5s cubic-bezier(.36,.32,.66,1.25) forwards;
 }
 
 .avatar {
-  width: 120px;
+  width: 200px;
   border-radius: 50%;
-  border: 3px solid #ee4b6a;
+  border: 4px solid #ee4b6a;
   box-shadow: 0 4px 12px rgba(238,75,106,0.18);
-  margin-bottom: 16px;
+  margin-bottom: 20px;
   transition: border-color 0.3s;
 }
 
@@ -78,30 +83,48 @@ body {
   border-color: #5b5ea6;
 }
 
-
 .card h1, .card h2 {
   color: #ee4b6a;
-  margin: 0.5em 0;
+  margin: 8px 0;
 }
-
 
 body::after {
   content: "";
-  display: block;
-  width: 420px;
-  height: 24px;
-  margin: 0 auto;
+  width: 540px;
+  height: 32px;
   border-radius: 18px;
   background: linear-gradient(90deg,#f0eef1 0%,#ddebf8 50%,#f0eef1 100%);
   opacity: 0.65;
   filter: blur(12px);
-  position: relative;
-  top: -20px;
-  z-index: -1;
+  position: absolute;
+  left: 50%;
+  top: 60%;
+  transform: translate(-50%, 0);
+  z-index: 0;
 }
 
-/* Animated card entrance */
 @keyframes cardIn {
-  from { transform: scale(0.9) translateY(50px); opacity: 0; }
-  to   { transform: scale(1) translateY(0); opacity: 1; }
+  0% {
+    transform: scale(0.7) translateY(80px);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.05) translateY(-12px);
+    opacity: 0.85;
+  }
+  80% {
+    transform: scale(0.98) translateY(4px);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes cardContentIn {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
